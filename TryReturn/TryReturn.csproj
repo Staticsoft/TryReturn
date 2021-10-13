@@ -5,4 +5,11 @@
     <RootNamespace>Staticsoft.TryReturn</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageId>Staticsoft.$(MSBuildProjectName)</PackageId>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/Staticsoft/$(MSBuildProjectName)</RepositoryUrl>
+  </PropertyGroup>
+
 </Project>
