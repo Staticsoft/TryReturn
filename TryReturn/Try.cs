@@ -8,7 +8,7 @@ namespace System
         public static TryExpression<T> Return<T>(Func<T> func)
             => new(func);
 
-        public static AsyncTryExpression<T> Return<T>(Task<T> task)
-            => new(task);
+        public static AsyncTryExpression<T> Return<T>(Func<Task<T>> func)
+            => new(func);
     }
 }
