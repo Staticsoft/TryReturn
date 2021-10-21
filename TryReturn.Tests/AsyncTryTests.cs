@@ -9,7 +9,7 @@ namespace Staticsoft.TryReturn.Tests
         [Fact]
         public async Task TryGetExpressionResult()
         {
-            var result = await Try.Return(Greet()).Result();
+            var result = await Try.Return(Greet).Result();
             Assert.Equal("Welcome to AsyncTry documentation!", result);
         }
 

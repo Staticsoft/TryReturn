@@ -7,20 +7,20 @@ namespace Staticsoft.TryReturn
 {
     public class AsyncTryExpression<TTask>
     {
-        readonly Task<TTask> Task;
+        readonly Func<Task<TTask>> Func;
         readonly IEnumerable<ExceptionHandler> Handlers;
 
-        public AsyncTryExpression(Task<TTask> task)
-            : this(task, Enumerable.Empty<ExceptionHandler>()) { }
+        public AsyncTryExpression(Func<Task<TTask>> func)
+            : this(func, Enumerable.Empty<ExceptionHandler>()) { }
 
-        AsyncTryExpression(Task<TTask> task, IEnumerable<ExceptionHandler> handlers)
-            => (Task, Handlers) = (task, handlers);
+        AsyncTryExpression(Func<Task<TTask>> func, IEnumerable<ExceptionHandler> handlers)
+            => (Func, Handlers) = (func, handlers);
 
         public async Task<TTask> Result()
         {
             try
             {
-                return await Task;
+                return await Func();
             }
             catch (Exception exception)
             {
@@ -40,6 +40,6 @@ namespace Staticsoft.TryReturn
             => On<TTask>(ex => handler(ex as T), typeof(T));
 
         AsyncTryExpression<TTask> On<T>(Func<Exception, Exception> handler, Type exceptionType)
-            => new(Task, Handlers.Append(new ExceptionHandler(handler, exceptionType)));
+            => new(Func, Handlers.Append(new ExceptionHandler(handler, exceptionType)));
     }
 }
