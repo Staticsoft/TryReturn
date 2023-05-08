@@ -1,16 +1,15 @@
 ﻿using System;
 
-namespace Staticsoft.TryReturn
+namespace Staticsoft.TryReturn;
+
+public class ExceptionHandler
 {
-    public class ExceptionHandler
-    {
-        readonly Func<Exception, Exception> Handler;
-        public readonly Type ExceptionType;
+    readonly Func<Exception, Exception> Handler;
+    public readonly Type ExceptionType;
 
-        public ExceptionHandler(Func<Exception, Exception> handler, Type exceptionType)
-            => (Handler, ExceptionType) = (handler, exceptionType);
+    public ExceptionHandler(Func<Exception, Exception> handler, Type exceptionType)
+        => (Handler, ExceptionType) = (handler, exceptionType);
 
-        public Exception Handle(Exception exception)
-            => Handler(exception);
-    }
+    public Exception Handle(Exception exception)
+        => Handler(exception);
 }
